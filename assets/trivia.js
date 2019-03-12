@@ -72,17 +72,20 @@ function generateQuiz(){
 generateQuiz();
 // compare user choice to correct answer. record score
 function scoreCheck() {
-    if (userGuess === valueSelected) {
+    if ($('input:radio[name=questionChoices]:checked').val() === triviaQuestions[0].answer) {
         correctGuess++;
+        console.log(correctGuess);
     } else {
         incorrectGuess++;
+        console.log(incorrectGuess);
     }
 }
+    
 
 
 // on submit then show score
-submitButton.addEventListener('click', scoreCheck());
-
+$('#submitButton').on('click', scoreCheck());
+console.log(scoreCheck());
 
 
 
