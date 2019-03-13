@@ -32,40 +32,57 @@ var triviaQuestions = [
 $('#quiz').hide();
 $('#submit').hide();
 $('#reset').hide();
+$('#timer').hide();
 
 // on start button -> generate quiz
 $('#start').on('click', function(){
     generateQuiz();
+    myTimer();
     $('#reset').show();
     $('#submit').show();
     $('#quiz').show();
+    $('#timer').show();
 })
+
+// timer function -- 60 seconds
+var sec = 60;
+var time = setInterval(myTimer, 1000);
+
+function myTimer() {
+    $('#timer').html(sec + " seconds left");
+    sec--;
+    if (sec == -1) {
+        clearInterval(time);
+        alert("Time out!! :(");
+        alert(totalScore);
+    }
+}
 
 function generateQuiz(){
     $('#start').hide();
     $('#quiz').show();
     $('#quiz').html(
-        '<h3>' + triviaQuestions[0].questions + '</h3>' +
+        '<h6>' + triviaQuestions[0].questions + '</h6>' +
         '<input type="radio" name="question0" value="' + triviaQuestions[0].options[0] + '">' + triviaQuestions[0].options[0] + '</input>' +    
         '<input type="radio" name="question0" value="' + triviaQuestions[0].options[1] + '">' + triviaQuestions[0].options[1] + '</input>' +    
         '<input type="radio" name="question0" value="' + triviaQuestions[0].options[2] + '">' + triviaQuestions[0].options[2] + '</input>' +    
         '<input type="radio" name="question0" value="' + triviaQuestions[0].options[3] + '">' + triviaQuestions[0].options[3] + '</input>' +
-        '<h3>' + triviaQuestions[1].questions + '</h3>' +
+        '<h6>' + triviaQuestions[1].questions + '</h6>' +
         '<input type="radio" name="question1" value="' + triviaQuestions[1].options[0] + '">' + triviaQuestions[1].options[0] + '</input>' +
         '<input type="radio" name="question1" value="' + triviaQuestions[1].options[1] + '">' + triviaQuestions[1].options[1] + '</input>' +
         '<input type="radio" name="question1" value="' + triviaQuestions[1].options[2] + '">' + triviaQuestions[1].options[2] + '</input>' +
         '<input type="radio" name="question1" value="' + triviaQuestions[1].options[3] + '">' + triviaQuestions[1].options[3] + '</input>' +
-        '<h3>' + triviaQuestions[2].questions + '</h3>' +
+        '<h6>' + triviaQuestions[2].questions + '</h6>' +
         '<input type="radio" name="question2" value="' + triviaQuestions[2].options[0] + '">' + triviaQuestions[2].options[0] + '</input>' +
         '<input type="radio" name="question2" value="' + triviaQuestions[2].options[1] + '">' + triviaQuestions[2].options[1] + '</input>' +
         '<input type="radio" name="question2" value="' + triviaQuestions[2].options[2] + '">' + triviaQuestions[2].options[2] + '</input>' +
         '<input type="radio" name="question2" value="' + triviaQuestions[2].options[3] + '">' + triviaQuestions[2].options[3] + '</input>' +
-        '<h3>' + triviaQuestions[3].questions + '</h3>' +
+        '<h6>' + triviaQuestions[3].questions + '</h6>' +
         '<input type="radio" name="question3" value="' + triviaQuestions[3].options[0] + '">' + triviaQuestions[3].options[0] + '</input>' +
         '<input type="radio" name="question3" value="' + triviaQuestions[3].options[1] + '">' + triviaQuestions[3].options[1] + '</input>' +
         '<input type="radio" name="question3" value="' + triviaQuestions[3].options[2] + '">' + triviaQuestions[3].options[2] + '</input>' +
         '<input type="radio" name="question3" value="' + triviaQuestions[3].options[3] + '">' + triviaQuestions[3].options[3] + '</input>' +
-        '<h3>' + triviaQuestions[4].questions + '</h3>' +
+        '<h6>' + triviaQuestions[4].questions + '</h6>' +
         '<input type="radio" name="question4" value="' + triviaQuestions[4].options[0] + '">' + triviaQuestions[4].options[0] + '</input>' +
         '<input type="radio" name="question4" value="' + triviaQuestions[4].options[1] + '">' + triviaQuestions[4].options[1] + '</input>' +
         '<input type="radio" name="question4" value="' + triviaQuestions[4].options[2] + '">' + triviaQuestions[4].options[2] + '</input>' +
@@ -114,7 +131,9 @@ function generateQuiz(){
 // reset button
 $('#reset').on('click', function () {
     totalScore = 0;
+    sec = 60;
     generateQuiz();
+    myTimer();
     $('#results').hide();
 })
 
